@@ -7,10 +7,16 @@ import { AppComponent } from './app.component';
 import {AuthenticationService} from "./services/authentication.service";
 import {UserService} from "./services/user.service";
 import {AuthenticationRequestInterceptor} from "./interceptor/authentication-request.interceptor";
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
