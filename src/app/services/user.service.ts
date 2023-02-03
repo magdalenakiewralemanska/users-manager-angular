@@ -3,7 +3,7 @@ import { environment} from "../../environments/environment";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../model/user";
-import {HttpResponse} from "../model/http-response";
+import {HttpResponseData} from "../model/http-response-data";
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +39,8 @@ export class UserService {
     return this.http.get<User[]>(`${this.localhost}/user/list`);
   }
 
-  public deleteUser(id: number): Observable<HttpResponse | HttpErrorResponse>{
-    return this.http.delete<HttpResponse>(`${this.localhost}/user/delete/${id}`);
+  public deleteUser(id: number): Observable<HttpResponseData | HttpErrorResponse>{
+    return this.http.delete<HttpResponseData>(`${this.localhost}/user/delete/${id}`);
   }
 
   public addUsersToCache(users: User[]): void{
