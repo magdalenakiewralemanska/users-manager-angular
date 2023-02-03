@@ -11,17 +11,17 @@
       <img class="img-responsive center-block img-user" src="https://bootdey.com/img/Content/Manbrown2.png" alt="img">
     </div>
     <div class="col-md-6 form-content">
-      <form accept-charset="utf-8" method="post" id="UserLoginForm" class="form-signin" action="">
+      <form #loginForm="ngForm" (ngSubmit)="startLogin(loginForm.value)" accept-charset="utf-8" id="UserLoginForm" class="form-signin">
         <h1 class="form-signin-heading text-muted">Login</h1>
         <div>
-        <input type="text" id="username"  autofocus="autofocus" placeholder="Username" class="form-control" name="username" required>
+        <input type="text" id="username" autofocus="autofocus" placeholder="Username" class="form-control" name="username" ngModel #username="ngModel" required>
         </div>
-        <span class="help-block" hidden style="color: red">Please enter your username</span>
+        <span class="help-block" style="color: red" *ngIf="username.invalid && username.touched">Please enter your username</span>
         <div>
-        <input type="password"  id="password" placeholder="Password" class="form-control" name="password" required>
+        <input type="password" id="password" placeholder="Password" class="form-control" name="password" ngModel #password="ngModel" required>
         </div>
-        <span class="help-block" hidden style="color: red">Please enter your password</span>
-        <button type="button" class="btn btn-lg btn-info btn-block">
+        <span class="help-block" style="color: red" *ngIf="password.invalid && password.touched">Please enter your password</span>
+        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-lg btn-info btn-block">
           <i class="fa fa-share"></i>
           Login
         </button>
