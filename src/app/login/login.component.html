@@ -1,1 +1,43 @@
-<p>login works!</p>
+<div class="container bootstrap snippets bootdey">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
+      <li><a href="#">&nbsp;</a></li>
+    </ul>
+    <h2 class="text-muted prj-name">Users manager</h2>
+  </div>
+
+  <div style="height:auto;min-height:300px;" class="jumbotron d-flex justify-content-center">
+    <div class="col-md-4">
+      <img class="img-responsive center-block img-user" src="https://bootdey.com/img/Content/Manbrown2.png" alt="img">
+    </div>
+    <div class="col-md-6 form-content">
+      <form accept-charset="utf-8" method="post" id="UserLoginForm" class="form-signin" action="">
+        <h1 class="form-signin-heading text-muted">Login</h1>
+        <div>
+        <input type="text" id="username"  autofocus="autofocus" placeholder="Username" class="form-control" name="username" required>
+        </div>
+        <span class="help-block" hidden style="color: red">Please enter your username</span>
+        <div>
+        <input type="password"  id="password" placeholder="Password" class="form-control" name="password" required>
+        </div>
+        <span class="help-block" hidden style="color: red">Please enter your password</span>
+        <button type="button" class="btn btn-lg btn-info btn-block">
+          <i class="fa fa-share"></i>
+          Login
+        </button>
+        <div class="mt-4">
+          <div class="d-flex justify-content-center links">
+            Don't have account? <a class="ml-2" style="color: #5bc0de"> Sign up</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="container bootstrap snippets bootdey">
+    <footer class="footer">
+      <p>&copy; User manager</p>
+    </footer>
+  </div>
+</div>
