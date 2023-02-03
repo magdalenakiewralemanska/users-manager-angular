@@ -1,1 +1,49 @@
-<p>register works!</p>
+<div class="container bootstrap snippets bootdey">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
+      <li><a href="#">&nbsp;</a></li>
+    </ul>
+    <h2 class="text-muted prj-name">Users manager</h2>
+  </div>
+
+  <div style="height:auto;min-height:300px;" class="jumbotron d-flex justify-content-center">
+    <div class="col-md-6 form-content">
+      <form #registerForm="ngForm" (ngSubmit)="startRegister(registerForm.value)" accept-charset="utf-8" id="UserLoginForm" class="form-signin">
+        <h1 class="form-signin-heading text-muted">Registration</h1>
+        <div>
+          <input type="text" id="firstName" autofocus="autofocus" placeholder="first name" class="form-control" name="firstName" ngModel #firstName="ngModel" required>
+        </div>
+        <span class="help-block" style="color: red" *ngIf="firstName.invalid && firstName.touched">Please enter your first name</span>
+          <div>
+            <input type="text" id="lastName" autofocus="autofocus" placeholder="last name" class="form-control" name="lastName" ngModel #lastName="ngModel" required>
+          </div>
+          <span class="help-block" style="color: red" *ngIf="lastName.invalid && lastName.touched">Please enter your last name</span>
+            <div>
+              <input type="email" id="email" autofocus="autofocus" placeholder="email" class="form-control" name="email" ngModel #email="ngModel" required>
+            </div>
+            <span class="help-block" style="color: red" *ngIf="email.invalid && email.touched">Please enter your email</span>
+            <div>
+          <input type="text" id="username" placeholder="Username" class="form-control" name="username" ngModel #username="ngModel" required>
+        </div>
+        <span class="help-block" style="color: red" *ngIf="username.invalid && username.touched">Please enter your username</span>
+        <button type="submit" [disabled]="registerForm.invalid" class="btn btn-lg btn-info btn-block">
+          <i class="fa fa-share"></i>
+          Register account
+        </button>
+        <div class="mt-4">
+          <div class="d-flex justify-content-center links">
+            Have account? <a routerLink="/login" class="ml-2" style="color: #5bc0de"> Go back to log in</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="container bootstrap snippets bootdey">
+    <footer class="footer">
+      <p>&copy; User manager</p>
+    </footer>
+  </div>
+</div>
+
