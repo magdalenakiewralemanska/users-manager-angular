@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import {FormsModule} from "@angular/forms";
+import {NotificationModule} from "./notification.module";
+import {NotificationService} from "./services/notification.service";
 
 @NgModule({
   declarations: [
@@ -23,9 +25,10 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NotificationModule
   ],
-  providers: [AuthenticationService, UserService, {provide: HTTP_INTERCEPTORS, useClass: AuthenticationRequestInterceptor, multi: true}],
+  providers: [NotificationService, AuthenticationService, UserService, {provide: HTTP_INTERCEPTORS, useClass: AuthenticationRequestInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
