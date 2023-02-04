@@ -19,11 +19,11 @@ export class UserService {
     formData.append('currentUserName', loggedInUsername);
     formData.append('firstName', user.firstName);
     formData.append('lastName', user.lastName);
-    formData.append('username', user.username);
     formData.append('email', user.email);
+    formData.append('username', user.username);
+    formData.append('role', user.rolePermissions);
     formData.append('isActive', JSON.stringify(user.isActive));
     formData.append('isNonLocked', JSON.stringify(user.isNonLocked));
-    formData.append('role', user.rolePermissions);
     return formData;
   }
 

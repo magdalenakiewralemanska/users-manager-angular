@@ -29,6 +29,7 @@ import {AuthenticationGuard} from "./guard/authentication.guard";
     FormsModule,
     NotificationModule
   ],
+
   providers: [AuthenticationGuard, NotificationService, AuthenticationService, UserService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthenticationRequestInterceptor, multi: true}],
   bootstrap: [AppComponent]
