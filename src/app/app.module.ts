@@ -14,13 +14,15 @@ import {FormsModule} from "@angular/forms";
 import {NotificationModule} from "./notification.module";
 import {NotificationService} from "./services/notification.service";
 import {AuthenticationGuard} from "./guard/authentication.guard";
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

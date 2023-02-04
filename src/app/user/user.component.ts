@@ -7,6 +7,7 @@ import {NotifierTypes} from "../model/notifier-types.enum";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {HttpResponseData} from "../model/http-response-data";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-user',
@@ -17,14 +18,17 @@ export class UserComponent implements OnInit{
 
   public users: User[];
   public selectedUser: User;
+  public user: User;
   private subscriptions: Subscription[] = [];
 
   public editUser = new User();
   public currentUsername: string;
 
-  constructor(private userService: UserService, private notificationService: NotificationService) {
+
+  constructor(private userService: UserService, private notificationService: NotificationService, private authenticationService: AuthenticationService) {
   }
   ngOnInit(): void {
+    this.user = this.authenticationService.getUserFromCache();
     this.getUsers(true);
   }
 

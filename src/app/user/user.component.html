@@ -7,7 +7,7 @@
             <div class="col-sm-12 col-xs-12">
               <div class ="col-md-12">
                 <span>
-                <button type="button" class="btn btn-light"  data-toggle="tab" href="#users">
+                <button type="button" (click)="getUsers(true)" class="btn btn-light"  data-toggle="tab" href="#users">
                   <i class="fa fa-users"></i>
                   Users
                 </button>
@@ -15,9 +15,10 @@
                 <button type="button" class="btn btn-primary">Get Report</button>
                 <button  type="button" class="btn btn-primary">Print Report</button>
                 <span>
-                <button type="button" class="btn btn-light" id="welcome" data-toggle="tab" href="#profile">
+                <button type="button" class="btn btn-light" id="welcome" data-toggle="tab" routerLink="/user/profile">
+
                   <i class="fa fa-user"></i>
-                  Welcome User
+                  Welcome {{user?.firstName}}
                 </button>
                   </span>
               </div>
@@ -67,27 +68,27 @@
                         <th>&nbsp;</th>
                       </tr>
                       </thead>
-                      <tbody *ngFor="let appuser of users">
+                      <tbody *ngFor="let user of users">
                       <tr>
                         <td>
                           <img src="https://bootdey.com/img/Content/user_1.jpg" alt="">
                         </td>
-                        <td (click)="selectUser(appuser)"> {{appuser?.firstName}} {{appuser?.lastName}}</td>
-                        <td (click)="selectUser(appuser)">{{appuser?.userIdNumber}}</td>
-                        <td (click)="selectUser(appuser)">{{appuser?.username}}</td>
-                        <td (click)="selectUser(appuser)">{{appuser?.email}}</td>
+                        <td (click)="selectUser(user)"> {{user?.firstName}} {{user?.lastName}}</td>
+                        <td (click)="selectUser(user)">{{user?.userIdNumber}}</td>
+                        <td (click)="selectUser(user)">{{user?.username}}</td>
+                        <td (click)="selectUser(user)">{{user?.email}}</td>
                         <td>
-                          <span [hidden]="appuser.isActive" class="badge badge-success">Active</span>
-                          <span [hidden]="!appuser.isActive" class="badge badge-danger">Inactive</span>
+                          <span [hidden]="user.isActive" class="badge badge-success">Active</span>
+                          <span [hidden]="!user.isActive" class="badge badge-danger">Inactive</span>
                         </td>
                         <td style="width: 20%;">
-                          <a (click)="onUpdateUser(appuser)" class="table-link text-info">
+                          <a (click)="onUpdateUser(user)" class="table-link text-info">
                             <span class="fa-stack" >
                               <i class="fa fa-square fa-stack-2x"></i>
                               <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                             </span>
                           </a>
-                          <a (click)="onDeleteUser(appuser.id)" class="table-link danger">
+                          <a (click)="onDeleteUser(user.id)" class="table-link danger">
                             <span class="fa-stack">
                               <i class="fa fa-square fa-stack-2x"></i>
                               <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>

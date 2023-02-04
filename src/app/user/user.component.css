@@ -134,3 +134,7 @@ a {
 a:hover{
   text-decoration:none;
 }
+
+#btn1-soft, #btn2-soft {
+  margin: 10px 10px 10px 10px;
+}
