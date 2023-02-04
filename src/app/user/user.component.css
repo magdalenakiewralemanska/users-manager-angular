@@ -1,0 +1,136 @@
+.panel{
+  font-family: 'Raleway', sans-serif;
+  padding: 0;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+.panel .panel-heading{
+  background: #535353;
+  padding: 15px;
+  border-radius: 0;
+}
+.panel .panel-heading .btn{
+  color: #000;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease 0s;
+  margin: 0 10px 0 10px;
+}
+
+#welcome {
+  position: absolute;
+  right: 10px;
+}
+.panel .panel-heading .btn:hover{ box-shadow: 0 0 10px wheat; }
+.panel .panel-heading .form-horizontal .form-group{ margin: 0; }
+.panel .panel-heading .form-horizontal label{
+  color: #fff;
+  margin-right: 10px;
+}
+.panel .panel-heading .form-horizontal .form-control{
+  display: inline-block;
+  width: 80px;
+  border: none;
+  border-radius: 0;
+}
+.panel .panel-heading .form-horizontal .form-control:focus{
+  box-shadow: none;
+  border: none;
+}
+.panel .panel-body{
+  padding: 0;
+  border-radius: 0;
+}
+.panel .panel-body .table thead tr th{
+  color: #fff;
+  background: #8D8D8D;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 12px;
+  border-bottom: none;
+}
+.panel .panel-body { width: 120px; }
+.panel .panel-body { width: 50%; }
+.panel .panel-body {
+  color: #555;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 13px;
+  vertical-align: middle;
+  border-color: #e7e7e7;
+}
+.panel .panel-body { background: #f5f5f5; }
+.panel .panel-body {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.panel .panel-body { display: inline-block; }
+.panel .panel-body {
+  color: #fff;
+  font-size: 13px;
+  line-height: 28px;
+  height: 28px;
+  width: 33px;
+  padding: 0;
+  border-radius: 0;
+  transition: all 0.3s ease 0s;
+}
+.panel .panel-body :hover{ box-shadow: 0 0 5px #ddd; }
+.panel .panel-footer{
+  color: #fff;
+  background: #535353;
+  font-size: 16px;
+  line-height: 33px;
+  padding: 25px 15px;
+  border-radius: 0;
+}
+.main-box.no-header {
+  padding-top: 20px;
+}
+
+.table a.table-link.danger {
+  color: #e74c3c;
+}
+
+.table a.table-link.danger :hover {
+
+}
+
+.user-list tbody td .user-subhead {
+  font-size: 0.875em;
+  font-style: italic;
+}
+.user-list tbody td .user-link {
+  display: block;
+  font-size: 1.2em;
+  padding-top: 3px;
+  margin-left: 60px;
+}
+a {
+  color: #3498db;
+  outline: none!important;
+}
+.user-list tbody td>img {
+  position: relative;
+  max-width: 50px;
+  float: left;
+  margin-right: 15px;
+}
+
+.table th {
+  horiz-align: center;
+}
+
+.table tbody tr td {
+  font-size: 1em;
+  vertical-align: middle;
+}
+a:hover{
+  text-decoration:none;
+}
