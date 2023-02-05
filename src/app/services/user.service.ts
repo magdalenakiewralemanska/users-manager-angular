@@ -14,32 +14,6 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public createFormDataForAddition(user: User): FormData {
-    const formData = new FormData();
-    formData.append('firstName', user.firstName);
-    formData.append('lastName', user.lastName);
-    formData.append('email', user.email);
-    formData.append('password', user.password);
-    formData.append('username', user.username);
-    formData.append('role', user.rolePermissions);
-    formData.append('isActive', JSON.stringify(user.isActive));
-    formData.append('isNonLocked', JSON.stringify(user.isNonLocked));
-    return formData;
-  }
-
-  public createFormDataForUpdate(currentUsername: string, userDto: User): FormData {
-    const formData = new FormData();
-    formData.append('currentUsername', currentUsername);
-    formData.append('firstName', userDto.firstName);
-    formData.append('lastName', userDto.lastName);
-    formData.append('email', userDto.email);
-    formData.append('username', userDto.username);
-    formData.append('role', userDto.rolePermissions);
-    formData.append('isActive', JSON.stringify(userDto.isActive));
-    formData.append('isNonLocked', JSON.stringify(userDto.isNonLocked));
-    return formData;
-  }
-
   public saveUser(user: User): Observable<User | HttpErrorResponse>{
     return this.http.post<User>(`${this.localhost}/user/add`, user);
   }
