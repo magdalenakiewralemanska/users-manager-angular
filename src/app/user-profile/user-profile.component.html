@@ -71,11 +71,19 @@
                     <option value="ROLE_USER">USER</option>
                   </select>
                 </div>
-                <div *ngIf="!isAdmin" class="form-group">
-                  <label>Role <small [hidden]="isAdmin">(read only)</small></label>
-                  <input type="text" name="role" required ngModel="USER" readonly class="form-control">
+                <div *ngIf="!isModerator" class="form-group">
+                  <label><b>Role</b></label>
+                  <select name="rolePermissions" [(ngModel)]="user.rolePermissions" class="form-control" required>
+                    <option value="ROLE_USER">USER</option>
+                  </select>
                 </div>
-
+                <div *ngIf="!isAdmin" class="form-group">
+                  <label><b>Role</b></label>
+                  <select name="rolePermissions" [(ngModel)]="user.rolePermissions" class="form-control" required>
+                    <option value="ROLE_MODERATOR">MODERATOR</option>
+                    <option value="ROLE_USER">USER</option>
+                  </select>
+                </div>
 
                     <div class="row">
                       <div class="col">

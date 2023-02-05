@@ -35,7 +35,7 @@ export class UserProfileComponent implements OnInit, OnDestroy{
         (response: User) => {
           this.authenticationService.addUserToCache(response);
           this.userService.getAllUsers();
-          this.sendNotification(NotifierTypes.SUCCESS, `${response.firstName}  ${response.firstName} user changed successfully`);
+          this.sendNotification(NotifierTypes.SUCCESS, `${response.firstName}  ${response.lastName} user changed successfully`);
         },
         (error: HttpErrorResponse) => {
           this.sendNotification(NotifierTypes.ERROR, error.error.message);
