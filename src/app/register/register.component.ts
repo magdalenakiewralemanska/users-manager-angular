@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit, OnDestroy{
     this.subscriptions.push(
       this.authenticationService.register(user).subscribe(
         (response: User) => {
+          this.router.navigateByUrl('/login');
           this.sendNotification(NotifierTypes.SUCCESS, `Account for ${response.username} created successfully`);
         },
         (error: HttpErrorResponse) => {

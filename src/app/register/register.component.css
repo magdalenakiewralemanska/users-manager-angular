@@ -130,7 +130,7 @@
   border-left-style: solid;
   border-color: #000;
 }
-#lastName, #email {
+#lastName, #email, #password {
   margin-bottom: -1px;
   border-radius: 0;
   border-top-style: none;

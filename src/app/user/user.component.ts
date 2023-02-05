@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../model/user";
 import {UserService} from "../services/user.service";
 import {Subscription} from "rxjs";
@@ -8,13 +8,14 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {HttpResponseData} from "../model/http-response-data";
 import {AuthenticationService} from "../services/authentication.service";
+import {Role} from "../model/role.enum";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit{
+export class UserComponent implements OnInit, OnDestroy{
 
   public users: User[];
   public selectedUser: User;
@@ -55,7 +56,7 @@ export class UserComponent implements OnInit{
   }
 
   public saveNewUser(userForm: NgForm): void {
-    const formData = this.userService.createFormData(null, userForm.value);
+    const formData = this.userService.createFormDataForAddition(userForm.value);
     this.subscriptions.push(
       this.userService.saveUser(formData).subscribe(
         (response: User) => {
@@ -92,7 +93,7 @@ export class UserComponent implements OnInit{
     document.getElementById('openUserUpdate').click();
   }
   public updateCurrentUser(): void {
-    const updatedData = this.userService.createFormData(this.currentUsername, this.editUser);
+    const updatedData = this.userService.createFormDataForUpdate(this.currentUsername, this.editUser);
     this.subscriptions.push(
       this.userService.updateUser(updatedData).subscribe(
         (response: User) => {
@@ -120,12 +121,27 @@ export class UserComponent implements OnInit{
     )
   }
 
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN;
+  }
+
+  public get isModerator(): boolean {
+    return this.getUserRole() === Role.MODERATOR || this.getUserRole() === Role.ADMIN;
+  }
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromCache().rolePermissions;
+  }
+
   private sendNotification(noteType: NotifierTypes, message: string): void{
     if(message) {
       this.notificationService.notify(noteType, message);
     } else {
       this.notificationService.notify(noteType, 'Something went wrong, try again.');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
 

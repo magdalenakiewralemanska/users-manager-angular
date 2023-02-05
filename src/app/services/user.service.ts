@@ -14,9 +14,22 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public createFormData(loggedInUsername: string, user: User): FormData {
+  public createFormDataForAddition(user: User): FormData {
     const formData = new FormData();
-    formData.append('currentUserName', loggedInUsername);
+    formData.append('firstName', user.firstName);
+    formData.append('lastName', user.lastName);
+    formData.append('email', user.email);
+    formData.append('password', user.password);
+    formData.append('username', user.username);
+    formData.append('role', user.rolePermissions);
+    formData.append('isActive', JSON.stringify(user.isActive));
+    formData.append('isNonLocked', JSON.stringify(user.isNonLocked));
+    return formData;
+  }
+
+  public createFormDataForUpdate(currentUsername: string, user: User): FormData {
+    const formData = new FormData();
+    formData.append('currentUsername', currentUsername);
     formData.append('firstName', user.firstName);
     formData.append('lastName', user.lastName);
     formData.append('email', user.email);

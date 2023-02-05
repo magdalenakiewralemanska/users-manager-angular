@@ -22,6 +22,10 @@
               <input type="email" id="email" autofocus="autofocus" placeholder="email" class="form-control" name="email" ngModel #email="ngModel" required>
             </div>
             <span class="help-block" style="color: red" *ngIf="email.invalid && email.touched">Please enter your email</span>
+        <div>
+          <input type="password" id="password" autofocus="autofocus" placeholder="password" class="form-control" name="password" ngModel #password="ngModel" required>
+        </div>
+        <span class="help-block" style="color: red" *ngIf="password.invalid && password.touched">Please enter your email</span>
             <div>
           <input type="text" id="username" placeholder="Username" class="form-control" name="username" ngModel #username="ngModel" required>
         </div>

@@ -1,0 +1,159 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <div class="my-5">
+        <h3>My Profile</h3>
+        <hr>
+      </div>
+        <div class="panel">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                <div class ="col-md-12">
+                <span>
+                <button type="button" routerLink="/user/management" class="btn btn-light"  data-toggle="tab" href="#users">
+                  <i class="fa fa-users"></i>
+                  Users
+                </button>
+                  </span>
+        <button type="button" class="btn btn-primary">Get Report</button>
+        <button  type="button" class="btn btn-primary">Print Report</button>
+        <span>
+                <button type="button" class="btn btn-light" id="welcome" data-toggle="tab" (click)="onLogOut()" >
+                  <i class="fas fa-sign-in-alt ml-1"></i>
+                  Logout
+                </button>
+                  </span>
+      </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-5 gx-5">
+          <form #profileUserForm="ngForm" (ngSubmit)="updateProfile(profileUserForm.value)" >
+
+          <div class="row">
+
+          <div class="col-xxl-8 mb-5 mb-xxl-0">
+            <div class="bg-secondary-soft px-4 py-5 rounded">
+              <div class="row g-3">
+                <h4 class="mb-4 mt-0">{{user?.firstName}} {{user?.lastName}}</h4>
+
+                <div class="col-md-6">
+                  <label class="form-label"><b>First Name </b></label>
+                  <input type="text" class="form-control" placeholder="" name="firstName" aria-label="First name" [(ngModel)]="user.firstName">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label"><b>Last Name</b> </label>
+                  <input type="text" class="form-control" placeholder="" name="lastName" aria-label="Last name" [(ngModel)]="user.lastName">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label"><b>Username</b></label>
+                  <input type="text" class="form-control" placeholder="" aria-label="Phone number" name="username" [(ngModel)]="user.username">
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label"><b>Email</b></label>
+                  <input type="email" class="form-control" placeholder=""  aria-label="Phone number" name="email" [(ngModel)]="user.email">
+                </div>
+
+                <div *ngIf="isAdmin" class="form-group">
+                  <label><b>Role</b></label>
+                  <select name="rolePermissions" [(ngModel)]="user.rolePermissions" class="form-control" required>
+                    <option value="ROLE_ADMIN">ADMIN</option>
+                    <option value="ROLE_MODERATOR">MODERATOR</option>
+                    <option value="ROLE_USER">USER</option>
+                  </select>
+                </div>
+                <div *ngIf="!isAdmin" class="form-group">
+                  <label>Role <small [hidden]="isAdmin">(read only)</small></label>
+                  <input type="text" name="role" required ngModel="USER" readonly class="form-control">
+                </div>
+
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="card mb-3">
+                          <div class="card-body">
+                            <h6 class="card-title font-weight-bold">Account settings</h6>
+                            <fieldset class="form-group">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="checkbox" name="isActive" [disabled]="!isModerator" [(ngModel)]="user.isActive" class="form-check-input">
+                                  Active <small [hidden]="isModerator">(read only)</small>
+                                </label>
+                              </div>
+                              <div class="form-check disabled">
+                                <label class="form-check-label">
+                                  <input type="checkbox" name="isNonLocked" [disabled]="!isModerator" [(ngModel)]="user.isNonLocked" class="form-check-input">
+                                  Unlocked <small [hidden]="isModerator">(read only)</small>
+                                </label>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="card mb-3">
+                          <div class="card-body">
+                            <h6 class="card-title font-weight-bold">Permissions For Role</h6>
+                            <div *ngFor="let authority of user?.authorities" class="card-text">{{authority}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xxl-4">
+            <div class="bg-secondary-soft px-4 py-3 rounded">
+              <div class="row g-3">
+                <h4 class="mb-4 mt-4 text-center">Your profile photo</h4>
+                <div class="text-center">
+                  <!-- Image upload -->
+                  <div class="square position-relative display-2 mb-2.5">
+                    <img class="rounded" height="250" width="250" src="https://bootdey.com/img/Content/user_1.jpg" alt="image">
+
+                  </div>
+                  <!-- Button -->
+                  <input type="file" id="customFile" name="file" hidden="">
+                  <br>
+<!--                  <button class="btn btn-success-soft" id="btn1-soft" >Upload</button>-->
+<!--                  <button type="button" class="btn btn-danger-soft" id="btn2-soft">Remove</button>-->
+
+                  <!-- Content -->
+                </div>
+
+                <div class="text-muted text-center"><small>Joined: {{user?.registrationDate | date: 'mediumDate'}}</small></div>
+                <div class="text-muted text-center"><small>Last login date: {{user?.lastLoginDisplay}}</small></div>
+              </div>
+            </div>
+          </div>
+            <div class="panel">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-sm-12 col-xs-12">
+                    <div class ="col-md-12">
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+          </form>
+         <!-- Row END -->
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
