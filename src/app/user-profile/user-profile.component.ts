@@ -73,4 +73,8 @@ export class UserProfileComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  printReport(): void {
+    window.print();
+  }
+
 }

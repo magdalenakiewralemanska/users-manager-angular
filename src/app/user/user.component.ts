@@ -144,5 +144,21 @@ export class UserComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  getReport(): void {
+    let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+    let tableSelect = document.getElementById('users');
+    let tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
+    let downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+    downloadLink.download = 'users-report.xls';
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+  printReport(): void {
+    window.print();
+  }
+
 
 }

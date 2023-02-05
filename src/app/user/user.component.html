@@ -12,8 +12,8 @@
                   Users
                 </button>
                   </span>
-                <button type="button" class="btn btn-primary">Get Report</button>
-                <button  type="button" class="btn btn-primary">Print Report</button>
+                <button (click)="getReport()" type="button" class="btn btn-primary">Get Report</button>
+                <button  (click)="printReport()" type="button" class="btn btn-primary">Print Report</button>
                 <span>
                 <button type="button" class="btn btn-light" id="welcome" data-toggle="tab" routerLink="/user/profile">
 
@@ -28,7 +28,7 @@
           <div class="row">
             <div class="col-sm-12 col-xs-12">
               <div class ="col-md-12">
-          <div class="tab-pane fade show active" id="users">
+          <div class="tab-pane fade show active">
             <div class="mb-3 float-right">
               <div class="btn-group mr-2">
                 <form #searchForm="ngForm" class="form-inline my-2 my-lg-0 justify-content-center">
@@ -55,7 +55,7 @@
               <div class="main-box no-header clearfix">
                 <div class="main-box-body clearfix">
                   <div class="table-responsive">
-                    <table class="table user-list">
+                    <table class="table user-list" id="users">
                       <thead>
                       <tr>
                         <th>Photo</th>
