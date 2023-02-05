@@ -27,25 +27,25 @@ export class UserService {
     return formData;
   }
 
-  public createFormDataForUpdate(currentUsername: string, user: User): FormData {
+  public createFormDataForUpdate(currentUsername: string, userDto: User): FormData {
     const formData = new FormData();
     formData.append('currentUsername', currentUsername);
-    formData.append('firstName', user.firstName);
-    formData.append('lastName', user.lastName);
-    formData.append('email', user.email);
-    formData.append('username', user.username);
-    formData.append('role', user.rolePermissions);
-    formData.append('isActive', JSON.stringify(user.isActive));
-    formData.append('isNonLocked', JSON.stringify(user.isNonLocked));
+    formData.append('firstName', userDto.firstName);
+    formData.append('lastName', userDto.lastName);
+    formData.append('email', userDto.email);
+    formData.append('username', userDto.username);
+    formData.append('role', userDto.rolePermissions);
+    formData.append('isActive', JSON.stringify(userDto.isActive));
+    formData.append('isNonLocked', JSON.stringify(userDto.isNonLocked));
     return formData;
   }
 
-  public saveUser(formData: FormData): Observable<User | HttpErrorResponse>{
-    return this.http.post<User>(`${this.localhost}/user/add`, formData);
+  public saveUser(user: User): Observable<User | HttpErrorResponse>{
+    return this.http.post<User>(`${this.localhost}/user/add`, user);
   }
 
-  public updateUser(formData: FormData): Observable<User | HttpErrorResponse>{
-    return this.http.post<User>(`${this.localhost}/user/update`, formData);
+  public updateUser(user: User): Observable<User | HttpErrorResponse>{
+    return this.http.post<User>(`${this.localhost}/user/update`, user);
   }
 
   public getAllUsers(): Observable<User[] | HttpErrorResponse>{

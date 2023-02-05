@@ -55,15 +55,14 @@ export class UserComponent implements OnInit, OnDestroy{
     document.getElementById('openUserInfo').click();
   }
 
-  public saveNewUser(userForm: NgForm): void {
-    const formData = this.userService.createFormDataForAddition(userForm.value);
+  public saveNewUser(userForm: NgForm, user: User): void {
     this.subscriptions.push(
-      this.userService.saveUser(formData).subscribe(
+      this.userService.saveUser(user).subscribe(
         (response: User) => {
           document.getElementById('closeModal').click();
           this.getUsers(false);
           userForm.reset();
-          this.sendNotification(NotifierTypes.SUCCESS, `${response.firstName}  ${response.firstName} user added successfully`);
+          this.sendNotification(NotifierTypes.SUCCESS, `${response.firstName}  ${response.lastName} user added successfully`);
         },
         (error: HttpErrorResponse) => {
           this.sendNotification(NotifierTypes.ERROR, error.error.message);
@@ -92,14 +91,14 @@ export class UserComponent implements OnInit, OnDestroy{
     this.currentUsername = editUser.username;
     document.getElementById('openUserUpdate').click();
   }
-  public updateCurrentUser(): void {
-    const updatedData = this.userService.createFormDataForUpdate(this.currentUsername, this.editUser);
+  public updateCurrentUser(user: User): void {
+    user = this.editUser;
     this.subscriptions.push(
-      this.userService.updateUser(updatedData).subscribe(
+      this.userService.updateUser(user).subscribe(
         (response: User) => {
           document.getElementById('closeUpdateModal').click();
           this.getUsers(false);
-          this.sendNotification(NotifierTypes.SUCCESS, `${response.firstName}  ${response.firstName} user changed successfully`);
+          this.sendNotification(NotifierTypes.SUCCESS, `${response.firstName}  ${response.lastName} user changed successfully`);
         },
         (error: HttpErrorResponse) => {
           this.sendNotification(NotifierTypes.ERROR, error.error.message);
@@ -126,7 +125,11 @@ export class UserComponent implements OnInit, OnDestroy{
   }
 
   public get isModerator(): boolean {
-    return this.getUserRole() === Role.MODERATOR || this.getUserRole() === Role.ADMIN;
+    return this.getUserRole() === Role.MODERATOR;
+  }
+
+  public get isUser(): boolean {
+    return this.getUserRole() === Role.USER;
   }
   private getUserRole(): string {
     return this.authenticationService.getUserFromCache().rolePermissions;

@@ -94,8 +94,9 @@
   padding-top: 20px;
 }
 
-.table a.table-link.danger {
+.table button.table-link.danger {
   color: #e74c3c;
+  border: none;
 }
 
 .table a.table-link.danger :hover {
@@ -112,9 +113,10 @@
   padding-top: 3px;
   margin-left: 60px;
 }
-a {
+#blue {
   color: #3498db;
   outline: none!important;
+  border: none;
 }
 .user-list tbody td>img {
   position: relative;

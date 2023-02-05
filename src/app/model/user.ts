@@ -20,6 +20,7 @@ export class User {
     this.lastName = '';
     this.username = '';
     this.email = '';
+    this.password = '';
     this.isActive = false;
     this.isNonLocked = false;
     this.rolePermissions = '';

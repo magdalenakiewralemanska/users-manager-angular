@@ -70,13 +70,13 @@
                     <option value="ROLE_USER">USER</option>
                   </select>
                 </div>
-                <div *ngIf="!isModerator" class="form-group">
+                <div *ngIf="isUser" class="form-group">
                   <label><b>Role</b></label>
                   <select name="rolePermissions" [(ngModel)]="user.rolePermissions" class="form-control" required>
                     <option value="ROLE_USER">USER</option>
                   </select>
                 </div>
-                <div *ngIf="!isAdmin" class="form-group">
+                <div *ngIf="isModerator" class="form-group">
                   <label><b>Role</b></label>
                   <select name="rolePermissions" [(ngModel)]="user.rolePermissions" class="form-control" required>
                     <option value="ROLE_MODERATOR">MODERATOR</option>
@@ -92,13 +92,13 @@
                             <fieldset class="form-group">
                               <div class="form-check">
                                 <label class="form-check-label">
-                                  <input type="checkbox" name="isActive" [disabled]="!isModerator" [(ngModel)]="user.isActive" class="form-check-input">
+                                  <input type="checkbox" name="isActive" [disabled]="isUser" [(ngModel)]="user.isActive" class="form-check-input">
                                   Active <small [hidden]="isModerator">(read only)</small>
                                 </label>
                               </div>
                               <div class="form-check disabled">
                                 <label class="form-check-label">
-                                  <input type="checkbox" name="isNonLocked" [disabled]="!isModerator" [(ngModel)]="user.isNonLocked" class="form-check-input">
+                                  <input type="checkbox" name="isNonLocked" [disabled]="isUser" [(ngModel)]="user.isNonLocked" class="form-check-input">
                                   Unlocked <small [hidden]="isModerator">(read only)</small>
                                 </label>
                               </div>

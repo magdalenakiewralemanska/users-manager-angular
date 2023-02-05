@@ -35,7 +35,7 @@
                   <input name="attributes" class="form-control mr=sm-2" ngModel (ngModelChange)="searchUsers(searchForm.value.attributes)"
                          type="search" placeholder="Search users...">
                 </form>
-                <button [hidden]="!isModerator" type="button" class="btn btn-info" data-toggle="modal" data-target="#addUserModal">
+                <button [hidden]="isUser" type="button" class="btn btn-info" data-toggle="modal" data-target="#addUserModal">
                   <i class="fa fa-plus"></i> New User
                 </button>
               </div>
@@ -68,27 +68,27 @@
                         <th>&nbsp;</th>
                       </tr>
                       </thead>
-                      <tbody *ngFor="let user of users">
+                      <tbody *ngFor="let appUser of users">
                       <tr>
                         <td>
                           <img src="https://bootdey.com/img/Content/user_1.jpg" alt="">
                         </td>
-                        <td (click)="selectUser(user)"> {{user?.firstName}} {{user?.lastName}}</td>
-                        <td (click)="selectUser(user)">{{user?.userIdNumber}}</td>
-                        <td (click)="selectUser(user)">{{user?.username}}</td>
-                        <td (click)="selectUser(user)">{{user?.email}}</td>
+                        <td (click)="selectUser(appUser)"> {{appUser?.firstName}} {{appUser?.lastName}}</td>
+                        <td (click)="selectUser(appUser)">{{appUser?.userIdNumber}}</td>
+                        <td (click)="selectUser(appUser)">{{appUser?.username}}</td>
+                        <td (click)="selectUser(appUser)">{{appUser?.email}}</td>
                         <td>
-                          <span [hidden]="user.isActive" class="badge badge-success">Active</span>
-                          <span [hidden]="!user.isActive" class="badge badge-danger">Inactive</span>
+                          <span [hidden]="appUser.isActive" class="badge badge-success">Active</span>
+                          <span [hidden]="!appUser.isActive" class="badge badge-danger">Inactive</span>
                         </td>
                         <td style="width: 20%;">
-                          <button (click)="onUpdateUser(user)" class="table-link text-info">
+                          <button (click)="onUpdateUser(appUser)" class="table-link text-info" id="blue">
                             <span class="fa-stack" >
                               <i class="fa fa-square fa-stack-2x"></i>
                               <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                             </span>
                           </button>
-                          <button [disabled]="!isAdmin" [hidden]="!isModerator" (click)="onDeleteUser(user.id)" class="table-link danger">
+                          <button [disabled]="isModerator" [hidden]="isUser" (click)="onDeleteUser(appUser.id)" class="table-link danger">
                             <span class="fa-stack">
                               <i class="fa fa-square fa-stack-2x"></i>
                               <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
@@ -182,7 +182,7 @@
 </div>
 
 <!--add user modal-->
-<div [hidden]="!isModerator" id="addUserModal" class="modal fade">
+<div [hidden]="isUser" id="addUserModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -190,7 +190,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
-        <form #userForm="ngForm" (ngSubmit)="saveNewUser(userForm)">
+        <form #userForm="ngForm" (ngSubmit)="saveNewUser(userForm, userForm.value)">
           <div class="form-group">
             <label>First name</label>
             <input type="text"  name="firstName" ngModel class="form-control" required >
@@ -218,17 +218,13 @@
             </div>
           </div>
           <div class="row">
-            <div *ngIf="isAdmin" class="form-group">
+            <div *ngIf="isAdmin || isModerator" class="form-group">
               <label>Role</label>
               <select name="rolePermissions" ngModel="ROLE_ADMIN" class="form-control" required>
                 <option value="ROLE_ADMIN">ADMIN</option>
                 <option value="ROLE_MODERATOR">MODERATOR</option>
                 <option value="ROLE_USER">USER</option>
               </select>
-            </div>
-            <div *ngIf="!isAdmin" class="form-group">
-              <label>Role</label>
-              <input type="text" name="role" required ngModel="USER" readonly class="form-control">
             </div>
           </div>
           <fieldset class="form-group">
@@ -249,7 +245,7 @@
             <button type="button" class="btn btn-warning" id="closeModal" data-dismiss="modal">
               Cancel
             </button>
-            <button type="submit" [disabled]="userForm.invalid || !isModerator" class="btn btn-success"> Save user</button>
+            <button type="submit" [disabled]="userForm.invalid" class="btn btn-success"> Save user</button>
           </div>
         </form>
       </div>
@@ -262,18 +258,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Update {{editUser?.firstName}} {{editUser?.lastName}} <small [hidden]="isModerator">(read only)</small></h4>
+        <h4 class="modal-title">Update {{editUser?.firstName}} {{editUser?.lastName}} <small [hidden]="isModerator || isAdmin">(read only)</small></h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
-        <form #updateUserForm="ngForm" >
+        <form #updateUserForm="ngForm" (ngSubmit)="updateCurrentUser(updateUserForm.value)">
           <div class="form-group">
             <label>First name</label>
-            <input type="text"  name="firstName" [(ngModel)]="editUser.firstName" [disabled]="!isModerator" class="form-control" required >
+            <input type="text"  name="firstName" [(ngModel)]="editUser.firstName" [disabled]="isUser" class="form-control" required >
           </div>
           <div class="form-group">
             <label>Last name</label>
-            <input type="text" [(ngModel)]="editUser.lastName" name="lastName" [disabled]="!isModerator" class="form-control" required >
+            <input type="text" [(ngModel)]="editUser.lastName" name="lastName" [disabled]="isUser" class="form-control" required >
           </div>
           <div class="row">
             <div class="form-group">
@@ -289,28 +285,24 @@
           </div>
           <div class="row">
             <div *ngIf="isAdmin" class="form-group">
-              <label>Role<small [hidden]="isAdmin">(read only)</small></label>
-              <select name="rolePermissions" [(ngModel)]="editUser.rolePermissions" [disabled]="!isAdmin" class="form-control" required>
+              <label><b>Role</b></label>
+              <select name="rolePermissions" [(ngModel)]="editUser.rolePermissions" class="form-control" required>
                 <option value="ROLE_ADMIN">ADMIN</option>
                 <option value="ROLE_MODERATOR">MODERATOR</option>
                 <option value="ROLE_USER">USER</option>
               </select>
             </div>
-            <div *ngIf="!isAdmin" class="form-group">
-              <label>Role</label>
-              <input type="text" name="role" required ngModel="USER" readonly class="form-control">
-            </div>
           </div>
           <fieldset class="form-group">
             <div class="form-check">
               <label class="form-check-label">
-                <input type="checkbox" name="isActive" [disabled]="!isModerator" [(ngModel)]="editUser.isActive" class="form-check-input">
+                <input type="checkbox" name="isActive" [disabled]="isUser" [(ngModel)]="editUser.isActive" class="form-check-input">
                 Active <small [hidden]="isModerator">(read only)</small>
               </label>
             </div>
             <div class="form-check disabled">
               <label class="form-check-label">
-                <input type="checkbox" name="isNonLocked" [disabled]="!isModerator" [(ngModel)]="editUser.isNonLocked" class="form-check-input">
+                <input type="checkbox" name="isNonLocked" [disabled]="isUser" [(ngModel)]="editUser.isNonLocked" class="form-check-input">
                 Unlocked <small [hidden]="isModerator">(read only)</small>
               </label>
             </div>
@@ -319,7 +311,7 @@
             <button type="button" class="btn btn-warning" id="closeUpdateModal" data-dismiss="modal">
               Cancel
             </button>
-            <button type="submit" (click)="updateCurrentUser()" [disabled]="updateUserForm.invalid || !isModerator" class="btn btn-success"> Update user</button>
+            <button type="submit" [disabled]="updateUserForm.invalid || isUser" class="btn btn-success"> Update user</button>
           </div>
         </form>
       </div>

@@ -28,10 +28,9 @@ export class UserProfileComponent implements OnInit, OnDestroy{
   }
 
   public updateProfile(user: User): void {
-    this.currentUsername = this.authenticationService.getUserFromCache().username;
-    const formData = this.userService.createFormDataForUpdate(this.currentUsername, user);
+    user = this.user;
     this.subscriptions.push(
-      this.userService.updateUser(formData).subscribe(
+      this.userService.updateUser(user).subscribe(
         (response: User) => {
           this.authenticationService.addUserToCache(response);
           this.userService.getAllUsers();
@@ -54,7 +53,11 @@ export class UserProfileComponent implements OnInit, OnDestroy{
   }
 
   public get isModerator(): boolean {
-    return this.getUserRole() === Role.MODERATOR || this.getUserRole() === Role.ADMIN;
+    return this.getUserRole() === Role.MODERATOR;
+  }
+
+  public get isUser(): boolean {
+    return this.getUserRole() === Role.USER;
   }
   private getUserRole(): string {
     return this.authenticationService.getUserFromCache().rolePermissions;
