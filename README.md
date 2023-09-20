@@ -1,27 +1,16 @@
+Users-manager project - frontend part:
+
+It is a simple application for registering and managing registered users with the ability to view the user's profile account and edit data. The project assumes the possibility of different levels of access to the data contained in the database and different levels of user access to individual functions. The project includes the possibility of blocking and deactivating a user account. In addition to typical personal data, the application also stores entries regarding registration and login dates for individual users. 
+This application consists of two basic parts: frontend and backend. This repository contains the backend part written in Java using the Spring framework. The basic functions that the application performs are: 
+1. user registration in the database,
+2. editing user data, 
+3. deleting a user, 
+4. logging in and logging out of a registered user. 
+Additional functionalities included in the project include printing the user profile view and user table, as well as the ability to save data to a file.
+
+
 # UsersManagerAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The frontend part of the application consists primarily of creating a user interface, with the option of logging in and creating a new account. The user can also view basic data about other users, without the possibility of editing them, unless he or she has a special role (administrator, moderator). Each user can freely modify their personal data, but they cannot change the role assigned to them or unblock/block the account. Only the administrator user has such permissions. The administrator can also, as the only user, delete an existing user account. Basic views include a tabular view of all users (with the ability to view individual user data) and views for logging in, registering and editing user data.
