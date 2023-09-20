@@ -13,3 +13,9 @@ Additional functionalities included in the project include printing the user pro
 The frontend part of the application consists primarily of creating a user interface, with the option of logging in and creating a new account. The user can also view basic data about other users, without the possibility of editing them, unless he or she has a special role (administrator, moderator). Each user can freely modify their personal data, but they cannot change the role assigned to them or unblock/block the account. Only the administrator user has such permissions. The administrator can also, as the only user, delete an existing user account. Basic views include a tabular view of all users (with the ability to view individual user data) and views for logging in, registering and editing user data.
 #
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
+
+# In the future:
+In the future, it is also planned to create such functionalities as:
+1.	Creating possibility to add photo by user and change that photo.
+2.	Creating password recovery option via email.
+3.	Creating own "white label" page.
